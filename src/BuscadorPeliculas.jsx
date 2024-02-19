@@ -10,13 +10,17 @@ const BuscadorPeliculas = () => {
 
   const handleInputChange = (e) => {
     setBusqueda(e.target.value);
-    //fetchPeliculas();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (busqueda.trim() === "") return;
+
     fetchPeliculas();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Esto hará que el scroll sea suave
+    });
   };
 
   const fetchPeliculas = async () => {
@@ -36,11 +40,11 @@ const BuscadorPeliculas = () => {
       if (!response.ok)
         throw { status: response.status, message: response.statusText };
 
-      swal({
-        title: "Exito!",
-        text: "Peliculas encontradas",
-        icon: "success",
-      });
+      // swal({
+      //   title: "Exito!",
+      //   text: "Peliculas encontradas",
+      //   icon: "success",
+      // });
 
       console.log(data.results);
     } catch (error) {
